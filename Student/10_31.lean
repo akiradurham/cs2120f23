@@ -25,7 +25,7 @@ def from_false_true_is_false (p : False) : True = False := False.elim p
 
 def proof_of_true : True := True.intro
 
-def false_implies_true : False → True := λ f => True.intro
+-- def false_implies_true : False → True := λ f => True.intro
 def false_implies_true' : False → True := λ f => False.elim f
 
 -- structure is like inductive but for types with only one constructor
@@ -88,7 +88,7 @@ theorem one_or_other' : Or Birds_chirping Sky_blue := Or.inr Sky_blue.yep
 -- example : is like theorem but do not have to give a name
 
 example : Or Birds_chirping (0=1) := Or.inl Birds_chirping.yep
-example : (0=1) ∨ (1=2) := _-- not a valid proposition
+--example : (0=1) ∨ (1=2) := _-- not a valid proposition
 
 theorem or_comm {P Q : Prop} : P ∨ Q → Q ∨ P :=
 λ d =>
