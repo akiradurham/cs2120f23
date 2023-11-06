@@ -207,8 +207,6 @@ let proof_of_bornotb := em B
 match proof_of_aornota with
 | Or.inl a =>
     match proof_of_bornotb with
-    | Or.inl na => Or.inr na
+    | Or.inl b => Or.inr (λ _ => nab ⟨a, b⟩)
     | Or.inr nb => Or.inr nb
 | Or.inr na => Or.inl na
-
--- use match
