@@ -38,3 +38,7 @@ predicate *P*.
 -- Every dog is friendly
 -- ∀ (d : Dog), Friendly d
 -- ∀ (p q : Person), ∃ (q : Person), Loves p q
+
+example : ∃ (n : Nat), True := ⟨ 3, True.intro ⟩
+
+example : ∃ (n : Nat), n%2==0 := ⟨ 4, rfl ⟩
