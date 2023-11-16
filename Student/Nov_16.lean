@@ -229,3 +229,39 @@ know what that means.
 -/
 
 -- Here
+/-
+Functions are specific cases of for all tpyes
+-/
+
+variable
+  (Dog : Type) -- overarching type
+  (Iris : Dog) -- Iris is a dog
+  (Blue : Dog → Prop) -- predicate on Dogs, blue is a property of dogs
+  (all_dogs_blue : ∀ (d : Dog), Blue d) -- proof of all dogs are blue
+  (iris_is_blue : Blue Iris)
+
+example : ∃ (d : Dog), Blue d := Exists.intro Iris iris_is_blue
+-- existential qunatification using iris
+example : ∃ (d : Dog), Blue d := ⟨ Iris, iris_is_blue ⟩
+
+#check ∀ (n : Nat), Nat
+#check ∀ (d : Dog), Blue d
+-- A formal statement in predicate logic that all dogs are blue
+#check all_dogs_blue Iris
+-- Universal specialization : Iris is blue
+-- Take universal proof or rule and apply it to a specific case
+
+-- Existenial quantification: assert there is
+-- some (at least one) value that sat the type
+
+-- proff of existential quantification is a pair, object and a proof that object sat
+
+-- _ rfl -- proof that _, something exists
+
+variable
+  (Person : Type)
+  (Loves : Person → Person → Prop)
+
+example : (∃ (beau : Person), ∀ (p : Person), Loves p beau ) →
+(∀ (p : Person), ∃ (q : Person), Loves p q)
+| ⟨ p, everyone_loves_p ⟩ => fun (m : Person) => ⟨ p, everyone_loves_p m ⟩
