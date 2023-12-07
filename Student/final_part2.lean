@@ -18,7 +18,7 @@ for this set.
 
 -- Here
 def odd : Nat → Prop := λ n => n % 2 = 1
-def odds: Set Nat := { n | odd n }
+def odds: Set Nat := { n | odd n } -- or def odds : Set Nat := { n | n % 2 = 1 }
 
 #reduce odds 1
 #reduce odds 2
@@ -36,13 +36,10 @@ of another number, namely m = 6.
 -/
 
 -- Here
-
-This part here
-
 -- def square (n : Nat) : Prop := ∃ (m : Nat), n = m * m
 -- def perfect_squares : Set Nat := { n | square n}
 
-def perfect_squares : Set Nat := { n | ∃ m : ℕ, n = m^2 }
+def perfect_squares : Set Nat := { n | ∃ m : Nat, n = m^2 }
 
 
 #reduce perfect_squares 6

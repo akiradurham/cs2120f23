@@ -460,6 +460,10 @@ theorem eq_rel_trans {α : Type} {a b c : α} (h: a = b) (g: b = c) : a = b → 
 theorem eq_rel_trans' {α : Type} {a b c : α} (h: a = b) (g: c = b) : a = c  -- fill with proposition: equality is transitive
   := Eq.trans h (Eq.symm g)           -- fill in your proof of it here, using Eq instead
 
+theorem eq_rel_trans'' {α : Type} {a b c : α} : a = b → b = c → a = c  -- fill with proposition: equality is transitive
+| d, e => by
+  rw [d, e]
+
 /-!
 ## Exam Question #3
 
@@ -473,3 +477,30 @@ is not.
 -/
 
 -- Your answer here
+inductive binary : Nat → Nat → Prop
+| clause (s sa : Nat) : sa = Nat.succ a → binary a sa
+
+example : binary 2 3 := binary.clause 2 3 rfl
+example : ¬binary 2 4 := λ h => nomatch h -- 2 + 1 dne 4, so its false and we give expression to False
+
+/-
+to define the set of pairs of natural number values
+inductive binary : Nat → Nat → Prop
+| clause (s sa : Nat) : sa = Nat.succ a → binary a sa
+def successive : Set Nat := { n | binary n (Nat.succ n) }
+or
+def successive : Set Nat := { n | ∃ m, binary n m }
+-/
+
+inductive binarypair : (Nat × Nat) → Prop
+| clause (p : Nat × Nat) : p.snd = Nat.succ p.fst → binarypair p
+
+example : binarypair (2, 3) := binarypair.clause (2, 3) rfl
+example : ¬binarypair (2, 4) :=
+  λ h =>
+  match h with
+  | binarypair.clause _ _ => nomatch h
+
+/-
+def successive' : Set (Nat × Nat) := { n | binarypair n }
+-/
