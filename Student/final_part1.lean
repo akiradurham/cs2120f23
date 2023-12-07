@@ -79,7 +79,7 @@ We can now form any likes proposition using this proposition builder.
 Moreover, we can state and prove propositions about dogs liking each other.
 -/
 
-example : likes rover iris := _             -- oops, no proof of this
+-- example : likes rover iris := _         -- oops, no proof of this
 example : ¬ likes rover iris := λ h => nomatch h  -- ok that's provable
 example : likes iris rover := ilr           -- yep, there's a proof
 example : likes rover fido ∧ likes iris rover := ⟨ rlf, ilr ⟩ --true!
@@ -117,10 +117,12 @@ formal proof of it, and briefly explain in English how you
 proved it.
 -/
 
-example : ∃ n, square n 4 := Exists.intro 2 (_) -- fill in _
+example : ∃ n, square n 4 := Exists.intro 2 (sqr 2 4 rfl) -- fill in _
 
 /-
 English language translation of propostion here:
+There exists a natural number n that satisfies square n 4, which means 4 = n^2, in this case it is 2
+Solved it by proving n = 2 in the given equation, by proving that 2^2 = 4 using sqr, the constructor, as the proof of 2
 -/
 
 /-!
@@ -192,7 +194,7 @@ a corresponding String value. Lean natively lacks a rule
 for performing such *coercions*.
 -/
 
-#check Eq 1 "Hi"
+-- #check Eq 1 "Hi"
 
 /-!
 ### Formal Definition of Equality Relation(s) in Lean
@@ -450,10 +452,13 @@ Notes: (1) fill in the _ holes. (2) you can and will have to
 write separate tactic applications indented on separate lines.
 -/
 
-theorem eq_rel_trans {α : Type} {a b c : α} :
-_               -- fill with proposition: equality is transitive
+theorem eq_rel_trans {α : Type} {a b c : α} (h: a = b) (g: b = c) : a = b → b = c → a = c  -- fill with proposition: equality is transitive
 | _, _ => by
-  _             -- fill in your proof of it here
+  rw [h]
+  rw [g]            -- fill in your proof of it here
+
+theorem eq_rel_trans' {α : Type} {a b c : α} (h: a = b) (g: c = b) : a = c  -- fill with proposition: equality is transitive
+  := Eq.trans h (Eq.symm g)           -- fill in your proof of it here, using Eq instead
 
 /-!
 ## Exam Question #3
